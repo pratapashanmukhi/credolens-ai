@@ -11,11 +11,11 @@ export default function PitchDeckModal({ isOpen, onClose }) {
       number: 1,
       title: "CredoLens AI",
       subtitle: "Autonomous SME Credit Underwriting & Forensic Financial Risk Engine",
-      badge: "BITSoM Vertex Builders Pitch Fest 2026 | Category: BFSI AI & Innovation",
+      badge: "Enterprise FinTech Solution | Category: AI Credit Decisioning",
       content: (
         <div className="text-center py-8 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800 text-xs text-emerald-400 font-semibold">
-            Startup Submission Deck
+            Executive Product Deck
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">CredoLens<span className="text-emerald-400">.AI</span></h2>
           <p className="text-base text-slate-300 max-w-xl mx-auto">
@@ -23,12 +23,12 @@ export default function PitchDeckModal({ isOpen, onClose }) {
           </p>
           <div className="pt-6 grid grid-cols-2 max-w-md mx-auto gap-4 text-left text-xs bg-slate-900/60 p-4 rounded-xl border border-slate-800">
             <div>
-              <span className="text-slate-500 block">Category:</span>
-              <span className="text-slate-200 font-bold">BFSI AI Problems / Innovation Agents</span>
+              <span className="text-slate-500 block">Focus Sector:</span>
+              <span className="text-slate-200 font-bold">BFSI & SME Commercial Lending</span>
             </div>
             <div>
-              <span className="text-slate-500 block">Stage:</span>
-              <span className="text-emerald-400 font-bold">Working Prototype / MVP</span>
+              <span className="text-slate-500 block">Product Readiness:</span>
+              <span className="text-emerald-400 font-bold">Functional Prototype & Sandbox</span>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
           <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-800/60 flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-white text-sm block">Deep Forensic Fraud Detection</strong>
+              <strong className="text-white text-sm block">Deep Graph RAG Forensics</strong>
               <span className="text-slate-300">Constructs Neo4j counterparty transaction graphs to uncover circular trading loops, shell vendors, and PDF font tampering.</span>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
     {
       number: 6,
       title: "Competitive Advantage & Moat",
-      subtitle: "Why CredoLens AI Wins over Legacy & Wrapper Tools",
+      subtitle: "Why CredoLens AI Outperforms Traditional Credit Bureaus & Generic LLMs",
       badge: "Defensible Moat",
       content: (
         <div className="py-2 overflow-x-auto">
@@ -160,7 +160,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
                 <th className="p-2 text-emerald-400 font-bold">CredoLens AI</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 text-slate-300">
+            <tbody className="divide-y border-slate-800/60 text-slate-300">
               <tr>
                 <td className="p-2 font-semibold">Underwriting Speed</td>
                 <td className="p-2 text-slate-500">5-14 Days</td>
@@ -215,27 +215,27 @@ export default function PitchDeckModal({ isOpen, onClose }) {
     {
       number: 8,
       title: "Traction & Roadmap",
-      subtitle: "From Hackathon Prototype to Enterprise Deployment",
+      subtitle: "From MVP to Enterprise Commercialization",
       badge: "Execution Plan",
       content: (
         <div className="space-y-3 py-2 text-xs">
           <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-800 flex items-center justify-between">
             <div>
-              <span className="font-bold text-emerald-400">Q3 2026 (Now): Prototype & Sandbox Launch</span>
-              <p className="text-slate-300 text-[11px]">Multi-agent engine built with 3 real test scenarios, Graph RAG, and instant CAM generation.</p>
+              <span className="font-bold text-emerald-400">Phase 1 (Current): Core Engine & Sandbox</span>
+              <p className="text-slate-300 text-[11px]">Multi-agent engine built with validated test scenarios, Graph RAG, and instant CAM generation.</p>
             </div>
             <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-900 text-emerald-300 font-bold">COMPLETED</span>
           </div>
           <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
             <div>
-              <span className="font-bold text-white">Q4 2026: NBFC Pilot Testing</span>
-              <p className="text-slate-400 text-[11px]">Deploy sandbox with 3 partner NBFCs; integrate Account Aggregator (AA) & GSTN live APIs.</p>
+              <span className="font-bold text-white">Phase 2: NBFC Pilot Testing</span>
+              <p className="text-slate-400 text-[11px]">Deploy sandbox with partner NBFCs; integrate Account Aggregator (AA) & GSTN live APIs.</p>
             </div>
             <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">IN PROGRESS</span>
           </div>
           <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
             <div>
-              <span className="font-bold text-white">Q1 2027: Enterprise Commercialization</span>
+              <span className="font-bold text-white">Phase 3: Enterprise Scale</span>
               <p className="text-slate-400 text-[11px]">Scale to 25+ lenders, target 100,000 underwritten loan applications ($550k ARR).</p>
             </div>
             <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">PLANNED</span>
@@ -245,14 +245,14 @@ export default function PitchDeckModal({ isOpen, onClose }) {
     },
     {
       number: 9,
-      title: "Team & Why Us",
-      subtitle: "Builders with Deep AI & Financial Engineering Expertise",
-      badge: "Team",
+      title: "Team & Vision",
+      subtitle: "Building the Operating System for Modern Commercial Credit",
+      badge: "Founding Team",
       content: (
         <div className="text-center py-6 space-y-4 text-xs">
           <div className="max-w-md mx-auto p-4 rounded-xl bg-slate-900 border border-slate-800">
-            <h4 className="text-base font-bold text-white">Les Créateurs Team</h4>
-            <p className="text-slate-400 mt-1">Full-Stack AI Engineers, Data Scientists, and Financial Analysts passionate about solving the MSME credit gap.</p>
+            <h4 className="text-base font-bold text-white">CredoLens Engineering & Finance Team</h4>
+            <p className="text-slate-400 mt-1">Specializing in Multi-Agent AI, Graph Neural Networks, and Financial Risk Analytics.</p>
             <div className="mt-3 pt-3 border-t border-slate-800 flex justify-center gap-4 text-slate-300 font-mono text-[11px]">
               <span>• Multi-Agent Systems</span>
               <span>• FinTech Graph RAG</span>
@@ -260,7 +260,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
             </div>
           </div>
           <p className="text-slate-400 max-w-lg mx-auto">
-            "We believe every honest entrepreneur deserves access to transparent, lightning-fast credit, while safeguarding lenders against fraud with zero-trust AI forensics."
+            "Democratizing fast, fair, and forensic-grade credit for global MSMEs while protecting financial institutions against fraud."
           </p>
         </div>
       )
@@ -275,25 +275,15 @@ export default function PitchDeckModal({ isOpen, onClose }) {
         <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-emerald-400" />
-            <span className="font-bold text-sm text-white">CredoLens AI - Pitch Deck</span>
+            <span className="font-bold text-sm text-white">CredoLens AI - Executive Deck</span>
             <span className="text-xs text-slate-400 font-mono">({currentSlide + 1} / {slides.length})</span>
           </div>
-          <div className="flex items-center gap-2">
-            <a
-              href="/BPF2026_PrototypeSubmission_PitchDeck_CredoLensAI.pdf"
-              download="BPF2026_PrototypeSubmission_PitchDeck_CredoLensAI.pdf"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold transition shadow-sm"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download PDF</span>
-            </a>
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
         {/* Slide Content */}
@@ -321,7 +311,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-40 text-slate-200 text-xs font-semibold border border-slate-800 transition"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span>Previous Slide</span>
+            <span>Previous</span>
           </button>
 
           <div className="flex items-center gap-1.5">
@@ -341,7 +331,7 @@ export default function PitchDeckModal({ isOpen, onClose }) {
             disabled={currentSlide === slides.length - 1}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 text-xs font-bold transition shadow-sm"
           >
-            <span>Next Slide</span>
+            <span>Next</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
