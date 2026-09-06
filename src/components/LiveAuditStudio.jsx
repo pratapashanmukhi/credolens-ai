@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { 
   ShieldAlert, ShieldCheck, AlertTriangle, FileText, CheckCircle2, XCircle, 
   Search, Bot, ArrowUpRight, ArrowDownRight, RefreshCw, Send, Sparkles, 
-  Printer, Activity, Network, DollarSign, Scale, Layers, ChevronRight
+  Printer, Activity, Network, DollarSign, Scale, Layers, Sliders, UploadCloud
 } from 'lucide-react';
 import { COMPANIES_DATA } from '../data/mockData';
+import CircularGraphVisualizer from './CircularGraphVisualizer';
+import LoanSimulator from './LoanSimulator';
 
-export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, onOpenDeck }) {
+export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, onOpenDeck, onOpenUpload }) {
   const company = COMPANIES_DATA[selectedCompanyId] || COMPANIES_DATA.apex;
   const [activeTab, setActiveTab] = useState('forensic');
   const [isAuditing, setIsAuditing] = useState(false);
@@ -87,7 +89,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
     <section id="sandbox" className="py-12 bg-slate-950 text-slate-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Studio Header */}
+        {/* Studio Header & Orchestration Status */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
           <div>
             <div className="flex items-center gap-3">
@@ -105,11 +107,20 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Action Bar */}
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={onOpenUpload}
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 transition shadow-sm"
+            >
+              <UploadCloud className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Upload New Dossier</span>
+            </button>
+
             <button
               onClick={handleRunAudit}
               disabled={isAuditing}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 transition shadow-sm"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 transition shadow-sm"
             >
               <RefreshCw className={`w-3.5 h-3.5 text-emerald-400 ${isAuditing ? 'animate-spin' : ''}`} />
               <span>{isAuditing ? 'Auditing Agents...' : 'Re-run Agent Ensemble'}</span>
@@ -130,13 +141,14 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
           <div className="flex items-center justify-between text-xs font-semibold text-slate-400 mb-3 px-1">
             <span className="flex items-center gap-2">
               <Bot className="w-4 h-4 text-emerald-400" />
-              <span>LangGraph Multi-Agent Ensemble Pipeline</span>
+              <span>LangGraph Multi-Agent Ensemble Pipeline Status</span>
             </span>
             <span className="text-slate-400 font-mono text-[11px]">TAT: {company.tatTime} | Zero Hallucination Guard</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             
+            {/* Agent 1: Forensic */}
             <div className={`p-3 rounded-xl border transition-all ${
               activeAgentIndex >= 0 ? 'bg-slate-950 border-slate-700' : 'bg-slate-950/40 border-slate-800/50 opacity-60'
             }`}>
@@ -155,6 +167,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
               </div>
             </div>
 
+            {/* Agent 2: Cashflow */}
             <div className={`p-3 rounded-xl border transition-all ${
               activeAgentIndex >= 1 ? 'bg-slate-950 border-slate-700' : 'bg-slate-950/40 border-slate-800/50 opacity-60'
             }`}>
@@ -173,6 +186,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
               </div>
             </div>
 
+            {/* Agent 3: Policy */}
             <div className={`p-3 rounded-xl border transition-all ${
               activeAgentIndex >= 2 ? 'bg-slate-950 border-slate-700' : 'bg-slate-950/40 border-slate-800/50 opacity-60'
             }`}>
@@ -191,6 +205,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
               </div>
             </div>
 
+            {/* Agent 4: CAM Synthesis */}
             <div className={`p-3 rounded-xl border transition-all ${
               activeAgentIndex >= 3 ? 'bg-slate-950 border-emerald-500/60 shadow-md shadow-emerald-950/40' : 'bg-slate-950/40 border-slate-800/50 opacity-60'
             }`}>
@@ -257,13 +272,14 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
         {/* Interactive Workspace Grid */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          {/* Left Column: Forensic Tabs */}
+          {/* Left Column: Forensic Tabs (8 cols) */}
           <div className="lg:col-span-8 flex flex-col">
             
-            <div className="flex border-b border-slate-800 space-x-2 text-xs font-semibold">
+            {/* Tab Navigation Bar */}
+            <div className="flex border-b border-slate-800 space-x-1 sm:space-x-2 text-xs font-semibold overflow-x-auto">
               <button
                 onClick={() => setActiveTab('forensic')}
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 whitespace-nowrap transition ${
                   activeTab === 'forensic'
                     ? 'border-emerald-400 text-emerald-400 bg-slate-900/40'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -275,7 +291,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
 
               <button
                 onClick={() => setActiveTab('cashflow')}
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 whitespace-nowrap transition ${
                   activeTab === 'cashflow'
                     ? 'border-emerald-400 text-emerald-400 bg-slate-900/40'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -286,33 +302,46 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
               </button>
 
               <button
+                onClick={() => setActiveTab('simulator')}
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 whitespace-nowrap transition ${
+                  activeTab === 'simulator'
+                    ? 'border-emerald-400 text-emerald-400 bg-slate-900/40'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-4 h-4" />
+                <span>Loan Simulator</span>
+              </button>
+
+              <button
                 onClick={() => setActiveTab('policy')}
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 whitespace-nowrap transition ${
                   activeTab === 'policy'
                     ? 'border-emerald-400 text-emerald-400 bg-slate-900/40'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <Scale className="w-4 h-4" />
-                <span>Policy & Bureau Rules</span>
+                <span>Policy Rules</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('cam')}
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 border-b-2 whitespace-nowrap transition ${
                   activeTab === 'cam'
                     ? 'border-emerald-400 text-emerald-400 bg-slate-900/40'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <FileText className="w-4 h-4" />
-                <span>Credit Memo (CAM)</span>
+                <span>CAM Memo</span>
               </button>
             </div>
 
             {/* Tab Contents */}
             <div className="p-6 rounded-b-2xl bg-slate-900/40 border border-t-0 border-slate-800 flex-1">
               
+              {/* TAB 1: FORENSIC & FRAUD GRAPH */}
               {activeTab === 'forensic' && (
                 <div className="space-y-6">
                   <div>
@@ -350,41 +379,12 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="text-xs font-semibold text-slate-400 mb-3 flex items-center justify-between">
-                      <span className="flex items-center gap-2">
-                        <Network className="w-4 h-4 text-cyan-400" />
-                        Counterparty Graph RAG & Fund-Flow Analysis
-                      </span>
-                      <span className="text-[10px] text-slate-500 font-mono">Neo4j Sub-graph</span>
-                    </div>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {company.agents.forensic.graphNodes.map((node, i) => (
-                        <div
-                          key={i}
-                          className={`p-3 rounded-xl border text-center ${
-                            node.status === 'suspect' || node.status === 'shell'
-                              ? 'bg-red-950/30 border-red-800 text-red-300'
-                              : node.status === 'moderate' || node.status === 'slow_payer'
-                              ? 'bg-amber-950/30 border-amber-800 text-amber-300'
-                              : 'bg-emerald-950/30 border-emerald-800 text-emerald-300'
-                          }`}
-                        >
-                          <div className="text-xs font-bold">{node.id}</div>
-                          <div className="text-[10px] uppercase font-mono text-slate-400 mt-0.5">{node.type}</div>
-                          {node.flag && (
-                            <div className="text-[9px] mt-1 font-semibold px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700">
-                              {node.flag}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  {/* Interactive Circular Graph Component */}
+                  <CircularGraphVisualizer company={company} />
                 </div>
               )}
 
+              {/* TAB 2: CASHFLOW & DSCR */}
               {activeTab === 'cashflow' && (
                 <div className="space-y-6">
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -415,7 +415,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
                   <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
                     <div className="text-xs font-semibold text-slate-300 mb-4 flex items-center justify-between">
                       <span>Monthly Banking Inflows vs Outflows (in ₹ Lakhs)</span>
-                      <span className="text-[10px] text-slate-400">Verified from Bank PDFs</span>
+                      <span className="text-[10px] text-slate-400">Extracted from HDFC/ICICI Statement PDFs</span>
                     </div>
 
                     <div className="space-y-3">
@@ -447,26 +447,47 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
                 </div>
               )}
 
+              {/* TAB 3: LOAN STRESS SIMULATOR */}
+              {activeTab === 'simulator' && (
+                <LoanSimulator company={company} />
+              )}
+
+              {/* TAB 4: POLICY & BUREAU RULES */}
               {activeTab === 'policy' && (
                 <div className="space-y-4">
-                  <h4 className="text-sm font-bold text-white">Lending Policy & Regulatory Compliance</h4>
+                  <h4 className="text-sm font-bold text-white">Lending Policy & Regulatory Compliance Checklist</h4>
                   <div className="space-y-2">
-                    {company.agents.policy.findings.map((f, i) => (
-                      <div key={i} className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs flex items-start gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span className="text-slate-300">{f}</span>
+                    {company.agents.policy.findings.map((item, i) => (
+                      <div key={i} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-3">
+                          {item.passed ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          ) : (
+                            <XCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                          )}
+                          <div>
+                            <span className="font-bold text-white block">{item.rule}</span>
+                            <span className="text-slate-400 text-[11px]">{item.detail}</span>
+                          </div>
+                        </div>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded font-mono ${
+                          item.passed ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
+                        }`}>
+                          {item.passed ? 'PASSED' : 'FLAGGED'}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
+              {/* TAB 5: CREDIT APPRAISAL MEMO (CAM) */}
               {activeTab === 'cam' && (
                 <div className="space-y-4 text-xs">
                   <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                     <div>
                       <h4 className="text-sm font-bold text-white">Generated Credit Appraisal Memo (CAM)</h4>
-                      <p className="text-[11px] text-slate-400">System Ref: CAM-2026-{company.id.toUpperCase()}-0906</p>
+                      <p className="text-[11px] text-slate-400">System Reference: CAM-2026-{company.id.toUpperCase()}-0906</p>
                     </div>
                     <button
                       onClick={() => window.print()}
@@ -478,7 +499,7 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
                   </div>
 
                   <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-[11px] text-slate-300">
-                    <div className="text-emerald-400 font-bold">// 1. BORROWER PROFILE</div>
+                    <div className="text-emerald-400 font-bold">// 1. BORROWER PROFILE & REGISTRATION</div>
                     <p>Company: {company.name} | CIN: {company.cin} | GSTIN: {company.gstin}</p>
                     <p>Industry: {company.industry} | HQ: {company.headquarters}</p>
                     
@@ -502,8 +523,8 @@ export default function LiveAuditStudio({ selectedCompanyId, onSelectCompany, on
             </div>
           </div>
 
-          {/* Right Column: AI Credit Copilot Chat */}
-          <div className="lg:col-span-4 flex flex-col h-[520px] rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl overflow-hidden">
+          {/* Right Column: AI Credit Copilot Chat (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col h-[560px] rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl overflow-hidden">
             
             <div className="p-4 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between">
               <div className="flex items-center gap-2">

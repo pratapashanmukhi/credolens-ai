@@ -8,31 +8,46 @@ export const COMPANIES_DATA = {
     founded: '2021',
     headquarters: 'New Delhi, India',
     loanRequested: '₹85,00,000',
+    requestedAmountNum: 8500000,
     loanPurpose: 'Unsecured Working Capital Limit',
     turnover: '₹4.20 Cr',
+    turnoverNum: 42000000,
     status: 'REJECTED',
     statusColor: 'red',
     riskScore: 34,
     riskLevel: 'Severe Forensic Risk',
     dscr: '0.82x',
+    dscrNum: 0.82,
     currentRatio: '0.91',
     fraudProbability: '89.4%',
     tatTime: '82 seconds',
     summary: 'High probability of circular trading and revenue inflation detected. 3 related party shell vendors identified with same registered address. Bank statement PDF shows modified text layers on transaction tables.',
+    loanTerms: {
+      suggestedAmount: 0,
+      suggestedRate: 0,
+      suggestedTenor: 0,
+      maxEligible: 0
+    },
     agents: {
       forensic: {
         status: 'CRITICAL ALERTS DETECTED',
         score: '32/100',
         alerts: [
-          { type: 'CIRCULAR_TRADING', severity: 'critical', message: 'Round-tripping loop identified: Apex Logistics -> Kuber Exim (₹28L) -> Shanti Traders (₹27.5L) -> Apex Logistics within 48 hours.' },
+          { type: 'CIRCULAR_TRADING', severity: 'critical', message: 'Round-tripping loop identified: Apex Logistics → Kuber Exim (₹28L) → Shanti Traders (₹27.5L) → Apex Logistics within 48 hours.' },
           { type: 'TAX_MISMATCH', severity: 'high', message: 'GSTR-3B reported turnover is 42.8% lower than bank account credit summations (unexplained inflows).' },
-          { type: 'DOC_TAMPERING', severity: 'critical', message: 'PDF Forensic Engine detected font substitution and metadata discrepancy in HDFC bank statement Page 4.' }
+          { type: 'DOC_TAMPERING', severity: 'critical', message: 'PDF Forensic Vision detected font substitution and metadata discrepancy in HDFC bank statement Page 4.' }
         ],
         graphNodes: [
-          { id: 'Apex Logistics', type: 'target', status: 'suspect' },
-          { id: 'Kuber Exim', type: 'counterparty', status: 'shell', flag: 'Zero Employee Shell Entity' },
-          { id: 'Shanti Traders', type: 'counterparty', status: 'shell', flag: 'Same Director PAN' },
-          { id: 'Zenith Fleet', type: 'vendor', status: 'clean' }
+          { id: 'Apex Logistics', type: 'Target Entity', status: 'suspect', x: 220, y: 140, details: 'Target Borrower | CIN: U60231DL2021PTC384910 | High Inflow Volatility' },
+          { id: 'Kuber Exim', type: 'Suspect Shell', status: 'shell', x: 80, y: 50, details: 'Zero employee shell company | Registered at same residential address | ₹28L Inflow' },
+          { id: 'Shanti Traders', type: 'Related Party', status: 'shell', x: 360, y: 50, details: 'Common Director PAN detected | ₹27.5L Outflow within 48h loop' },
+          { id: 'Zenith Fleet', type: 'Legit Vendor', status: 'clean', x: 220, y: 240, details: 'Verified Fleet Logistics Partner | ₹4.2L Monthly payments' }
+        ],
+        graphEdges: [
+          { from: 'Apex Logistics', to: 'Kuber Exim', amount: '₹28.0 Lakhs', label: 'Round-trip Leg 1 (Day 1)', suspect: true },
+          { from: 'Kuber Exim', to: 'Shanti Traders', amount: '₹27.8 Lakhs', label: 'Layering (Day 2)', suspect: true },
+          { from: 'Shanti Traders', to: 'Apex Logistics', amount: '₹27.5 Lakhs', label: 'Integration (Day 2)', suspect: true },
+          { from: 'Apex Logistics', to: 'Zenith Fleet', amount: '₹4.2 Lakhs', label: 'Diesel/Fleet OPEX', suspect: false }
         ]
       },
       cashflow: {
@@ -58,16 +73,17 @@ export const COMPANIES_DATA = {
         status: 'NON-COMPLIANT',
         score: '28/100',
         findings: [
-          'DSCR 0.82x violates internal credit policy threshold (Min 1.25x).',
-          '7 EMI/Cheque bounces in last 6 months (Max allowed: 1).',
-          'Director credit score: CIBIL 612 (Below minimum cutoff 680).'
+          { rule: 'Minimum DSCR >= 1.25x', passed: false, detail: 'Calculated 0.82x (Severe repayment deficit)' },
+          { rule: 'Cheque/ECS Bounces <= 1 in 6M', passed: false, detail: '7 bounces recorded across active accounts' },
+          { rule: 'Director CIBIL >= 680', passed: false, detail: 'Director score: CIBIL 612' },
+          { rule: 'GST vs Banking Variance <= 15%', passed: false, detail: 'Variance is 42.8% (Unexplained gap)' }
         ]
       },
       cam: {
         recommendation: 'STRONG REJECTION',
         sanctionLimit: '₹0.00',
         suggestedRate: 'N/A',
-        keyRationale: 'Fraud Risk: High forensic probability of fabricated revenue via circular invoicing network. Severe debt service deficit and falsified PDF bank records.'
+        keyRationale: 'Severe Forensic Risk: High probability of fabricated revenue via circular invoicing network. DSCR 0.82x is unsustainable for debt servicing. Altered PDF bank records detected.'
       }
     }
   },
@@ -80,17 +96,26 @@ export const COMPANIES_DATA = {
     founded: '2019',
     headquarters: 'Pune, Maharashtra',
     loanRequested: '₹1,20,00,000',
+    requestedAmountNum: 12000000,
     loanPurpose: 'High-Throughput Cleanroom Expansion',
     turnover: '₹14.80 Cr',
+    turnoverNum: 148000000,
     status: 'APPROVED',
     statusColor: 'emerald',
     riskScore: 92,
     riskLevel: 'Prime Grade (A+)',
     dscr: '2.65x',
+    dscrNum: 2.65,
     currentRatio: '2.14',
     fraudProbability: '0.4%',
     tatTime: '68 seconds',
     summary: 'Exceptional financial discipline. Verified revenue streams with Tier-1 pharmaceutical enterprises. Clean GSTR-2A/3B reconciliation and robust operating cash flow coverage.',
+    loanTerms: {
+      suggestedAmount: 12000000,
+      suggestedRate: 10.25,
+      suggestedTenor: 36,
+      maxEligible: 18000000
+    },
     agents: {
       forensic: {
         status: 'ALL INTEGRITY CHECKS PASSED',
@@ -101,10 +126,15 @@ export const COMPANIES_DATA = {
           { type: 'NO_TAMPERING', severity: 'positive', message: 'Cryptographic PDF watermark and digital signature verification passed.' }
         ],
         graphNodes: [
-          { id: 'Nexus BioTech', type: 'target', status: 'verified' },
-          { id: 'Sun Pharma Ltd', type: 'client', status: 'prime', flag: 'Verified Enterprise Client' },
-          { id: 'Biocon Labs', type: 'client', status: 'prime', flag: 'Prompt 21-Day Payer' },
-          { id: 'Thermo Fisher', type: 'supplier', status: 'prime', flag: 'Raw Material Supplier' }
+          { id: 'Nexus BioTech', type: 'Target Entity', status: 'verified', x: 220, y: 140, details: 'Prime MSME Borrower | Clean CIBIL 785 | Robust OCF' },
+          { id: 'Sun Pharma Ltd', type: 'Blue-Chip Client', status: 'prime', x: 80, y: 50, details: 'Long-term procurement contract | ₹48L quarterly receivables' },
+          { id: 'Biocon Labs', type: 'Blue-Chip Client', status: 'prime', x: 360, y: 50, details: 'Verified enterprise client | Prompt 21-day average settlement' },
+          { id: 'Thermo Fisher', type: 'Tier-1 Supplier', status: 'prime', x: 220, y: 240, details: 'Authorized lab reagents supplier | Consistent vendor payments' }
+        ],
+        graphEdges: [
+          { from: 'Sun Pharma Ltd', to: 'Nexus BioTech', amount: '₹48.0 Lakhs', label: 'Commercial Sales Invoice', suspect: false },
+          { from: 'Biocon Labs', to: 'Nexus BioTech', amount: '₹34.5 Lakhs', label: 'Formulation Supply Contract', suspect: false },
+          { from: 'Nexus BioTech', to: 'Thermo Fisher', amount: '₹18.2 Lakhs', label: 'Raw Material OPEX', suspect: false }
         ]
       },
       cashflow: {
@@ -130,9 +160,10 @@ export const COMPANIES_DATA = {
         status: 'FULLY COMPLIANT',
         score: '95/100',
         findings: [
-          'DSCR 2.65x comfortably exceeds benchmark (Min 1.25x).',
-          'Zero cheque bounces across all active current accounts in 24 months.',
-          'Eligible for RBI Priority Sector Lending (MSME Manufacturing Category).'
+          { rule: 'Minimum DSCR >= 1.25x', passed: true, detail: 'Calculated 2.65x (Healthy surplus buffer)' },
+          { rule: 'Cheque/ECS Bounces <= 1 in 6M', passed: true, detail: 'Zero bounces recorded across 24 months' },
+          { rule: 'Director CIBIL >= 680', passed: true, detail: 'Director score: CIBIL 785' },
+          { rule: 'GST vs Banking Variance <= 15%', passed: true, detail: '0.6% variance (99.4% perfect match)' }
         ]
       },
       cam: {
@@ -152,17 +183,26 @@ export const COMPANIES_DATA = {
     founded: '2018',
     headquarters: 'Mumbai, India',
     loanRequested: '₹2,50,00,000',
+    requestedAmountNum: 25000000,
     loanPurpose: 'Project Overdraft & Equipment Lease',
     turnover: '₹28.40 Cr',
+    turnoverNum: 284000000,
     status: 'CONDITIONAL',
     statusColor: 'amber',
     riskScore: 68,
     riskLevel: 'Moderate Credit Risk',
     dscr: '1.42x',
+    dscrNum: 1.42,
     currentRatio: '1.25',
     fraudProbability: '12.8%',
     tatTime: '74 seconds',
     summary: 'Sound operational viability but high working capital cycle due to 80-day govt receivable turnaround. Requires structured escrow control and secondary collateral.',
+    loanTerms: {
+      suggestedAmount: 18000000,
+      suggestedRate: 12.50,
+      suggestedTenor: 24,
+      maxEligible: 20000000
+    },
     agents: {
       forensic: {
         status: 'MODERATE CONCENTRATION RISK',
@@ -173,10 +213,15 @@ export const COMPANIES_DATA = {
           { type: 'VERIFIED_CONTRACTS', severity: 'positive', message: 'Work orders authenticated against state procurement portal.' }
         ],
         graphNodes: [
-          { id: 'Zenith Infra', type: 'target', status: 'moderate' },
-          { id: 'State PWD Dept', type: 'client', status: 'slow_payer', flag: '78-Day DSO' },
-          { id: 'Metro Rail Corp', type: 'client', status: 'prime', flag: 'Milestone Payments' },
-          { id: 'Tata Steel', type: 'supplier', status: 'prime', flag: 'Raw Materials' }
+          { id: 'Zenith Infra', type: 'Target Entity', status: 'moderate', x: 220, y: 140, details: 'EPC Contractor | Heavy Equipment Assets: ₹3.8 Cr' },
+          { id: 'State PWD Dept', type: 'Govt Client', status: 'slow_payer', x: 80, y: 50, details: 'State Highway Contract | High credit quality but 78-day delay' },
+          { id: 'Metro Rail Corp', type: 'Govt Client', status: 'prime', x: 360, y: 50, details: 'Milestone-based contract | Escrow mechanism viable' },
+          { id: 'Tata Steel', type: 'Raw Material Supplier', status: 'prime', x: 220, y: 240, details: 'Steel supplier | Clean repayment track' }
+        ],
+        graphEdges: [
+          { from: 'State PWD Dept', to: 'Zenith Infra', amount: '₹95.0 Lakhs', label: 'Milestone 3 Disbursement (Delayed)', suspect: false },
+          { from: 'Metro Rail Corp', to: 'Zenith Infra', amount: '₹1.10 Cr', label: 'Escrow Receivable', suspect: false },
+          { from: 'Zenith Infra', to: 'Tata Steel', amount: '₹42.0 Lakhs', label: 'Structural Steel OPEX', suspect: false }
         ]
       },
       cashflow: {
@@ -202,9 +247,10 @@ export const COMPANIES_DATA = {
         status: 'CONDITIONALLY APPROVED',
         score: '72/100',
         findings: [
-          'DSCR 1.42x meets minimum threshold (1.25x).',
-          'Receivable delay requires structural protection.',
-          'Sufficient fixed plant & machinery collateral available (₹3.8 Cr valuation).'
+          { rule: 'Minimum DSCR >= 1.25x', passed: true, detail: 'Calculated 1.42x (Meets policy threshold)' },
+          { rule: 'Cheque/ECS Bounces <= 1 in 6M', passed: true, detail: '1 technical bounce due to govt payment delay' },
+          { rule: 'Director CIBIL >= 680', passed: true, detail: 'Director score: CIBIL 718' },
+          { rule: 'Collateral Coverage >= 1.2x', passed: true, detail: '₹3.8 Cr Machinery collateral provides 1.52x cover' }
         ]
       },
       cam: {

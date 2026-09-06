@@ -6,10 +6,12 @@ import ArchitectureView from './components/ArchitectureView';
 import BusinessModel from './components/BusinessModel';
 import Footer from './components/Footer';
 import PitchDeckModal from './components/PitchDeckModal';
+import DocumentIngestionModal from './components/DocumentIngestionModal';
 
 export default function App() {
   const [selectedCompanyId, setSelectedCompanyId] = useState('apex');
   const [isDeckOpen, setIsDeckOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   const handleScrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -23,6 +25,7 @@ export default function App() {
       {/* Top Navigation */}
       <Navbar
         onOpenDeck={() => setIsDeckOpen(true)}
+        onOpenUpload={() => setIsUploadOpen(true)}
         onScrollToSection={handleScrollToSection}
       />
 
@@ -32,6 +35,7 @@ export default function App() {
         onSelectCompany={setSelectedCompanyId}
         onScrollToSection={handleScrollToSection}
         onOpenDeck={() => setIsDeckOpen(true)}
+        onOpenUpload={() => setIsUploadOpen(true)}
       />
 
       {/* Main Live Multi-Agent Audit Studio */}
@@ -39,6 +43,7 @@ export default function App() {
         selectedCompanyId={selectedCompanyId}
         onSelectCompany={setSelectedCompanyId}
         onOpenDeck={() => setIsDeckOpen(true)}
+        onOpenUpload={() => setIsUploadOpen(true)}
       />
 
       {/* Deep-Dive Multi-Agent Architecture */}
@@ -58,6 +63,12 @@ export default function App() {
       <PitchDeckModal
         isOpen={isDeckOpen}
         onClose={() => setIsDeckOpen(false)}
+      />
+
+      {/* Document Ingestion & OCR Scanner Modal */}
+      <DocumentIngestionModal
+        isOpen={isUploadOpen}
+        onClose={() => setIsUploadOpen(false)}
       />
     </div>
   );

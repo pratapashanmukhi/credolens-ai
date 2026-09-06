@@ -1,7 +1,7 @@
 import React from 'react';
-import { ShieldCheck, Sparkles, FileText, Cpu, BarChart3, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Sparkles, FileText, Cpu, BarChart3, UploadCloud } from 'lucide-react';
 
-export default function Navbar({ onOpenDeck, onScrollToSection }) {
+export default function Navbar({ onOpenDeck, onOpenUpload, onScrollToSection }) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -40,18 +40,26 @@ export default function Navbar({ onOpenDeck, onScrollToSection }) {
         {/* Actions */}
         <div className="flex items-center gap-3">
           <button
-            onClick={onOpenDeck}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition shadow-sm"
+            onClick={onOpenUpload}
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition"
           >
-            <FileText className="w-4 h-4 text-emerald-400" />
+            <UploadCloud className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Upload Dossier</span>
+          </button>
+
+          <button
+            onClick={onOpenDeck}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition shadow-sm"
+          >
+            <FileText className="w-3.5 h-3.5 text-emerald-400" />
             <span>Pitch Deck (10 Slides)</span>
           </button>
 
           <button
             onClick={() => onScrollToSection('sandbox')}
-            className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition shadow-md shadow-emerald-500/25 font-bold"
+            className="hidden lg:flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition shadow-md shadow-emerald-500/25"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3.5 h-3.5" />
             <span>Audit Live SME</span>
           </button>
         </div>
