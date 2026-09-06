@@ -2,7 +2,7 @@ import React from 'react';
 import { Search, Building2, UploadCloud, Bell, RefreshCw, Command } from 'lucide-react';
 import { COMPANIES_DATA } from '../data/mockData';
 
-export default function TopHeader({ selectedCompanyId, onSelectCompany, onOpenUpload, onReAudit, isAuditing }) {
+export default function TopHeader({ selectedCompanyId, onSelectCompany, onOpenUpload, onReAudit, isAuditing, onOpenCommandPalette }) {
   const company = COMPANIES_DATA[selectedCompanyId] || COMPANIES_DATA.apex;
 
   return (
@@ -10,17 +10,18 @@ export default function TopHeader({ selectedCompanyId, onSelectCompany, onOpenUp
       
       {/* Search & Breadcrumb */}
       <div className="flex items-center gap-4 flex-1 max-w-lg">
-        <div className="relative w-full max-w-xs">
+        <button
+          onClick={onOpenCommandPalette}
+          className="relative w-full max-w-xs text-left"
+        >
           <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="Search CIN, PAN, GSTIN..."
-            className="w-full pl-8 pr-8 py-1.5 rounded-lg bg-[#111622] border border-[#1e293b] text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500/80 transition"
-          />
+          <div className="w-full pl-8 pr-8 py-1.5 rounded-lg bg-[#111622] border border-[#1e293b] text-xs text-slate-400 hover:border-slate-600 transition">
+            Search CIN, PAN, GSTIN, actions...
+          </div>
           <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] font-mono text-slate-500 bg-[#0c101a] px-1.5 py-0.5 rounded border border-[#1e293b]">
             ⌘K
           </span>
-        </div>
+        </button>
 
         <div className="hidden lg:flex items-center gap-2 text-xs text-slate-500 font-medium">
           <span>Borrower:</span>

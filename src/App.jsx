@@ -9,6 +9,7 @@ import PolicyComplianceView from './views/PolicyComplianceView';
 import CreditMemoView from './views/CreditMemoView';
 import CopilotChatView from './views/CopilotChatView';
 import DocumentIngestionModal from './components/DocumentIngestionModal';
+import CommandPaletteModal from './components/CommandPaletteModal';
 import { COMPANIES_DATA } from './data/mockData';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
   const [selectedCompanyId, setSelectedCompanyId] = useState('apex');
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isAuditing, setIsAuditing] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   const company = COMPANIES_DATA[selectedCompanyId] || COMPANIES_DATA.apex;
 
@@ -27,7 +29,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex antialiased">
+    <div className="min-h-screen bg-[#090D16] text-[#E2E8F0] font-sans flex antialiased selection:bg-[#38BDF8]/20 selection:text-[#38BDF8]">
       
       {/* 1. Left Sidebar Navigation */}
       <Sidebar
@@ -47,6 +49,7 @@ export default function App() {
           onOpenUpload={() => setIsUploadOpen(true)}
           onReAudit={handleReAudit}
           isAuditing={isAuditing}
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
         {/* Dynamic View Workspace */}
@@ -102,6 +105,16 @@ export default function App() {
       <DocumentIngestionModal
         isOpen={isUploadOpen}
         onClose={() => setIsUploadOpen(false)}
+      />
+
+      {/* Global Command Palette (⌘K) Modal */}
+      <CommandPaletteModal
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onSelectCompany={setSelectedCompanyId}
+        onSelectTab={setActiveTab}
+        onOpenUpload={() => setIsUploadOpen(true)}
+        onReAudit={handleReAudit}
       />
 
     </div>
