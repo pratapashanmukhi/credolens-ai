@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Bot, Send, Sparkles, User, ShieldAlert, CheckCircle2, DollarSign, Calculator } from 'lucide-react';
+import { Bot, Send, User, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 export default function CopilotChatView({ company }) {
   const [messages, setMessages] = useState([
     {
       sender: 'copilot',
-      text: `Hello Shanmukhi. I am your autonomous Underwriter Copilot. I have completed the forensic multi-agent audit for **${company.name}** (Risk Score: **${company.riskScore}/100**). You can ask me to explain specific fraud anomalies, simulate covenant terms, or check DSCR debt capacity.`
+      text: `Hello Shanmukhi. I am your Underwriting Intelligence Copilot. I have audited **${company.name}** (Risk Score: **${company.riskScore}/100**). You can query me on DSCR calculations, circular trading loops, shell entity links, or covenant structuring.`
     }
   ]);
   const [inputQuery, setInputQuery] = useState('');
@@ -58,37 +58,37 @@ export default function CopilotChatView({ company }) {
     <div className="space-y-4 max-w-4xl mx-auto">
       
       {/* Header */}
-      <div className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
-            <Bot className="w-5 h-5" />
+      <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#0e1422] border border-[#1a2233]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-[#111622] border border-[#1a2233] flex items-center justify-center text-blue-400">
+            <Bot className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-slate-900">Underwriter Copilot Assistant</h2>
-            <p className="text-xs text-slate-500 font-mono">Target Context: {company.name} ({company.cin})</p>
+            <h2 className="text-xs font-bold text-slate-100">Underwriter Intelligence Copilot</h2>
+            <p className="text-[10px] text-slate-400 font-mono">Context: {company.name}</p>
           </div>
         </div>
-        <span className="text-xs font-mono px-3 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
-          ● RAG Engine Online
+        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 font-bold border border-emerald-900/60">
+          ● RAG Online
         </span>
       </div>
 
       {/* Chat Messages Box */}
-      <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs h-[480px] overflow-y-auto space-y-4 text-xs">
+      <div className="p-4 rounded-xl bg-[#0e1422] border border-[#1a2233] h-[460px] overflow-y-auto space-y-3 text-xs">
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`flex gap-3 max-w-[85%] ${m.sender === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
+            className={`flex gap-2.5 max-w-[85%] ${m.sender === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
           >
-            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-xs font-bold ${
-              m.sender === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-100 border border-slate-200 text-blue-600'
+            <div className={`w-6 h-6 rounded flex items-center justify-center shrink-0 text-xs font-bold ${
+              m.sender === 'user' ? 'bg-blue-600 text-white' : 'bg-[#111622] border border-[#1a2233] text-blue-400'
             }`}>
-              {m.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
+              {m.sender === 'user' ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
             </div>
-            <div className={`p-4 rounded-2xl leading-relaxed whitespace-pre-line text-xs ${
+            <div className={`p-3 rounded-lg leading-relaxed whitespace-pre-line text-xs ${
               m.sender === 'user'
                 ? 'bg-blue-600 text-white font-medium shadow-xs'
-                : 'bg-slate-50 border border-slate-200 text-slate-800'
+                : 'bg-[#090d16] border border-[#1a2233] text-slate-200'
             }`}>
               {m.text}
             </div>
@@ -97,42 +97,42 @@ export default function CopilotChatView({ company }) {
       </div>
 
       {/* Suggested Prompts */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         <button
           onClick={() => handlePromptClick('Explain the DSCR and cashflow calculation')}
-          className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium transition shadow-xs"
+          className="px-2.5 py-1 rounded-lg bg-[#0e1422] hover:bg-[#111622] border border-[#1a2233] text-slate-300 text-xs font-medium transition"
         >
-          📊 Explain DSCR & Cashflow
+          📊 Explain DSCR
         </button>
         <button
           onClick={() => handlePromptClick('Show circular trading fraud flags')}
-          className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium transition shadow-xs"
+          className="px-2.5 py-1 rounded-lg bg-[#0e1422] hover:bg-[#111622] border border-[#1a2233] text-slate-300 text-xs font-medium transition"
         >
-          🔍 Show Fraud & Shell Flags
+          🔍 Show Fraud Flags
         </button>
         <button
           onClick={() => handlePromptClick('What is the recommended sanction limit and interest rate?')}
-          className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium transition shadow-xs"
+          className="px-2.5 py-1 rounded-lg bg-[#0e1422] hover:bg-[#111622] border border-[#1a2233] text-slate-300 text-xs font-medium transition"
         >
           📄 Sanction Recommendation
         </button>
       </div>
 
       {/* Input Bar */}
-      <form onSubmit={handleSendMessage} className="p-2 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2">
+      <form onSubmit={handleSendMessage} className="p-1.5 bg-[#0e1422] rounded-xl border border-[#1a2233] flex items-center gap-2">
         <input
           type="text"
           value={inputQuery}
           onChange={(e) => setInputQuery(e.target.value)}
           placeholder="Ask copilot about financial ratios, forensic flags, or loan terms..."
-          className="flex-1 px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 bg-transparent focus:outline-none"
+          className="flex-1 px-3 py-2 text-xs text-slate-100 placeholder-slate-500 bg-transparent focus:outline-none"
         />
         <button
           type="submit"
-          className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-xs flex items-center gap-1.5"
+          className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center gap-1.5"
         >
           <span>Send</span>
-          <Send className="w-3.5 h-3.5" />
+          <Send className="w-3 h-3" />
         </button>
       </form>
 
