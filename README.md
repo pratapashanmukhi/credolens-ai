@@ -112,3 +112,29 @@ flowchart TD
 
     H --> J["🏦 Executive Credit Decision"]
     I --> J
+ ```
+
+---
+
+# 🔍 How CredoLens AI Works
+
+CredoLens AI follows a structured underwriting pipeline where every stage contributes evidence to the final credit decision.
+
+### Step 1: Document Intelligence
+
+Borrower documents such as bank statements, GST returns, ITRs and invoices are uploaded into the system.
+
+The Forensic Vision Agent extracts structured financial information while preserving the relationship between the extracted values and their source documents.
+
+### Step 2: Financial Reconciliation
+
+Extracted information is cross-checked across different financial sources.
+
+```text
+Bank Transactions
+        ↓
+GST Reported Revenue
+        ↓
+ITR / Declared Income
+        ↓
+Financial Consistency Check
