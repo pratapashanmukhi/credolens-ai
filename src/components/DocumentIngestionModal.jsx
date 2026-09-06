@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, UploadCloud, FileText, CheckCircle2, ShieldCheck, Loader2, Sparkles, ArrowRight } from 'lucide-react';
 
-export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomCase }) {
+export default function DocumentIngestionModal({ isOpen, onClose }) {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
@@ -43,18 +43,18 @@ export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomC
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden">
         
         {/* Modal Header */}
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+        <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <div className="flex items-center gap-2">
-            <UploadCloud className="w-5 h-5 text-emerald-400" />
-            <span className="font-bold text-sm text-white">Upload & Audit New Financial Dossier</span>
+            <UploadCloud className="w-5 h-5 text-blue-600" />
+            <span className="font-bold text-sm text-slate-900">Ingest & Audit Financial Dossier</span>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -70,25 +70,25 @@ export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomC
             onDragOver={handleDrag}
             onDrop={handleDrop}
             className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all ${
-              dragActive ? 'border-emerald-500 bg-emerald-950/20' : 'border-slate-800 hover:border-slate-700 bg-slate-950/60'
+              dragActive ? 'border-blue-500 bg-blue-50/50' : 'border-slate-200 hover:border-slate-300 bg-slate-50'
             }`}
           >
-            <UploadCloud className="w-10 h-10 text-emerald-400 mx-auto mb-3 animate-bounce" />
-            <h4 className="text-sm font-bold text-white">Drag & drop Bank Statement PDF, GSTR-3B, or Balance Sheet</h4>
-            <p className="text-slate-400 mt-1 text-[11px]">Supports PDF, CSV, Excel up to 50 MB with cryptographic watermark parsing</p>
+            <UploadCloud className="w-10 h-10 text-blue-600 mx-auto mb-3" />
+            <h4 className="text-sm font-bold text-slate-900">Drag & drop Bank Statement PDF, GSTR-3B, or Balance Sheet</h4>
+            <p className="text-slate-500 mt-1 text-[11px]">Supports PDF, CSV, Excel files up to 50 MB with OCR watermark inspection</p>
 
             <div className="mt-4 flex justify-center">
-              <label className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold cursor-pointer border border-slate-700 transition">
-                <span>Browse Local Files</span>
+              <label className="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-800 font-semibold cursor-pointer border border-slate-200 shadow-xs transition">
+                <span>Browse Files</span>
                 <input type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.csv,.xlsx" />
               </label>
             </div>
 
             {selectedFile && (
-              <div className="mt-4 p-2.5 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-between max-w-sm mx-auto text-left">
+              <div className="mt-4 p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between max-w-sm mx-auto text-left shadow-xs">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-emerald-400" />
-                  <span className="font-medium text-slate-200 truncate">{selectedFile.name}</span>
+                  <FileText className="w-4 h-4 text-blue-600" />
+                  <span className="font-medium text-slate-800 truncate">{selectedFile.name}</span>
                 </div>
                 <span className="text-[10px] text-slate-400 font-mono">{(selectedFile.size / 1024).toFixed(0)} KB</span>
               </div>
@@ -97,32 +97,32 @@ export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomC
 
           {/* Real-Time Extraction Pipeline Status */}
           {isScanning && (
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between font-semibold text-slate-300">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <div className="flex items-center justify-between font-semibold text-slate-700">
                 <span className="flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 text-emerald-400 animate-spin" />
+                  <Loader2 className="w-4 h-4 text-blue-600 animate-spin" />
                   <span>Multi-Agent Parsing Pipeline...</span>
                 </span>
-                <span className="text-emerald-400 font-mono text-[11px]">
+                <span className="text-blue-600 font-mono text-[11px] font-bold">
                   {scanStep === 1 ? 'OCR LayoutLMv3' : scanStep === 2 ? 'Graph RAG Neo4j' : scanStep === 3 ? 'DSCR Engine' : 'CAM Formulation'}
                 </span>
               </div>
-              <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                 <div
                   style={{ width: `${(scanStep / 4) * 100}%` }}
-                  className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+                  className="bg-blue-600 h-full rounded-full transition-all duration-300"
                 />
               </div>
             </div>
           )}
 
           {scanStep === 4 && (
-            <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-800 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <div>
-                  <div className="font-bold text-white text-sm">Forensic Audit & CAM Compiled!</div>
-                  <div className="text-slate-300 text-[11px]">All 4 agents have synthesized the risk profile and calculated DSCR.</div>
+                  <div className="font-bold text-slate-900 text-sm">Forensic Audit & CAM Compiled!</div>
+                  <div className="text-slate-600 text-[11px]">All 4 agents have synthesized the risk profile and calculated DSCR.</div>
                 </div>
               </div>
             </div>
@@ -131,20 +131,18 @@ export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomC
         </div>
 
         {/* Modal Actions */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
+        <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-slate-400 hover:text-white font-medium"
+            className="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 font-medium"
           >
             Cancel
           </button>
 
           {scanStep === 4 ? (
             <button
-              onClick={() => {
-                onClose();
-              }}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition shadow-md shadow-emerald-500/20"
+              onClick={onClose}
+              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition shadow-sm"
             >
               <span>View Audit in Studio</span>
               <ArrowRight className="w-4 h-4" />
@@ -153,7 +151,7 @@ export default function DocumentIngestionModal({ isOpen, onClose, onApplyCustomC
             <button
               onClick={startExtraction}
               disabled={isScanning}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-bold transition shadow-md shadow-emerald-500/20"
+              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold transition shadow-sm"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isScanning ? 'Extracting...' : 'Start Multi-Agent Audit'}</span>
