@@ -1,140 +1,132 @@
-# 🛡️ CredoLens AI
+﻿# CredoLens AI — Autonomous SME Credit Underwriting & Forensic Risk Intelligence
 
-## Autonomous SME Credit Underwriting & Forensic Risk Intelligence Engine
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg?logo=vite&logoColor=white)](https://vite.dev/)
+[![React](https://img.shields.io/badge/React-18-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://credolens-ai.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **From 14 days of manual SME credit due diligence to 90 seconds of explainable intelligence.**
+> **"From 14 days of manual SME credit due diligence to 90 seconds of explainable intelligence."**
 
-CredoLens AI is an autonomous multi-agent AI platform built to transform SME/MSME credit underwriting.
-
-It analyzes borrower documents, reconciles financial information, investigates suspicious transaction networks, calculates credit metrics using deterministic logic, and generates an audit-ready Credit Appraisal Memo (CAM).
-
----
-
-## 🚀 Live Prototype
-
-🌐 **Live Demo:** https://credolens-ai.vercel.app
+CredoLens AI is an autonomous multi-agent AI platform built to transform SME/MSME credit underwriting. It ingests borrower financial documents, reconciles banking statements against GST filings, investigates suspicious transaction networks, calculates deterministic solvency and liquidity metrics, and compiles an audit-ready Credit Appraisal Memo (CAM).
 
 ---
 
-# 🎯 The Problem
+## Live Prototype & Pitch Deck
+
+- **Live Prototype Application**: [credolens-ai.vercel.app](https://credolens-ai.vercel.app)
+- **Executive Pitch Deck**: [docs/BPF2026_PitchDeck_CredoLensAI.pdf](docs/BPF2026_PitchDeck_CredoLensAI.pdf)
+
+---
+
+## The Problem
 
 Traditional SME credit underwriting is:
-
-- 🐌 Slow and highly manual
-- 📄 Dependent on large volumes of financial documents
-- 🔄 Fragmented across bank statements, GST, ITR and invoices
-- 🕵️ Difficult to investigate for hidden fraud networks
-- ⚠️ Prone to manual calculation and reconciliation errors
-- 📝 Time-consuming for Credit Appraisal Memo preparation
-
-Credit teams often spend days collecting, validating, reconciling and interpreting borrower information.
-
-> **The problem is not the lack of financial data.  
-> The problem is converting fragmented data into trustworthy credit intelligence quickly.**
+- **Painfully Slow**: Requires 10–14 days of manual review per enterprise borrower.
+- **Fragmented Across Disconnected Sources**: Bank statements, GST returns, ITR filings, and vendor invoices exist in silos.
+- **Vulnerable to Hidden Fraud**: Circular transaction rings, round-tripping, and dummy shell entities easily evade manual sampling.
+- **Labor-Intensive**: Credit analysts spend 80% of their time cross-referencing numbers and compiling memos rather than evaluating credit risk.
 
 ---
 
-# 💡 Our Solution
+## Solution & Architecture
 
-CredoLens AI creates an autonomous underwriting pipeline that:
+CredoLens AI deploys a coordinated pipeline of specialized analytical engines:
 
-1. 📥 Ingests borrower financial documents
-2. 👁️ Extracts and validates financial information
-3. 🔄 Reconciles bank transactions with GST and tax data
-4. 🕸️ Builds a counterparty relationship graph
-5. 🔍 Detects suspicious transaction patterns
-6. 🧮 Calculates financial metrics deterministically
-7. 📊 Generates an explainable risk assessment
-8. 📄 Generates an automated Credit Appraisal Memo
-9. 💬 Provides an AI Credit Copilot for credit managers
-
-### ⚡ Result
-
-# **14 Days → 90 Seconds**
-
----
-
-# 🤖 Multi-Agent Architecture
-
-CredoLens AI uses specialized autonomous agents instead of relying on one generic AI model.
-
-Each agent performs a specific role in the underwriting workflow.
-
-```mermaid
-flowchart TD
-
-    A["📂 Borrower Documents<br/>Bank Statements • GST • ITR • Invoices"]
-
-    A --> B["👁️ Forensic Vision Agent"]
-
-    B --> B1["PDF & Layout Understanding"]
-    B --> B2["Transaction Extraction"]
-    B --> B3["Document Integrity Analysis"]
-    B --> B4["GST / Bank Reconciliation"]
-
-    B1 --> C["🧠 Unified Financial Evidence Layer"]
-    B2 --> C
-    B3 --> C
-    B4 --> C
-
-    C --> D["🕸️ Graph RAG Agent"]
-
-    D --> D1["Counterparty Graph"]
-    D --> D2["Relationship Mapping"]
-    D --> D3["Circular Trading Detection"]
-    D --> D4["Shell Entity Pattern Analysis"]
-
-    C --> E["🧮 Cashflow & Credit Scoring Agent"]
-
-    E --> E1["Operating Cash Flow"]
-    E --> E2["DSCR"]
-    E --> E3["EMI Bounce Analysis"]
-    E --> E4["Liquidity Runway"]
-    E --> E5["Debt Service Capacity"]
-
-    D --> F["⚠️ Risk & Forensic Engine"]
-    E --> F
-
-    F --> G["📊 Explainable Credit Decision"]
-
-    G --> H["📄 CAM Synthesis Agent"]
-
-    H --> H1["Credit Appraisal Memo"]
-    H --> H2["Recommended Sanction Limit"]
-    H --> H3["Risk Flags"]
-    H --> H4["Conditions Precedent"]
-
-    G --> I["💬 AI Credit Copilot"]
-
-    I --> I1["Policy Queries"]
-    I --> I2["Fraud Investigation"]
-    I --> I3["Credit Metric Explanation"]
-
-    H --> J["🏦 Executive Credit Decision"]
-    I --> J
- ```
+```
+[Borrower Financial Ingestion]
+  ├── Bank Statements (PDF / CSV)
+  ├── GST Returns (GSTR-1, GSTR-3B)
+  └── Income Tax Returns (ITR-5/6)
+             │
+             ▼
+[Cross-Document Reconciliation Engine]
+  ├── Revenue Verification (Reported vs. Realized Bank Inflows)
+  ├── Tax Gap Analysis (Sales vs. GST Deposited)
+  └── Cash-to-Accrual Mismatch Detection
+             │
+             ▼
+[Forensic Network Graph Analyzer]
+  ├── Entity-Relationship Mapping
+  ├── Circular Round-Tripping Ring Detection
+  └── High-Risk Counterparty / Mule Flagging
+             │
+             ▼
+[Financial Solvency & Ratio Engine]
+  ├── DSCR (Debt Service Coverage Ratio)
+  ├── Current & Quick Ratios
+  └── Cash Burn & Working Capital Runway
+             │
+             ▼
+[Automated Credit Appraisal Memo (CAM) Generator]
+  ├── Executive Summary & Decision Recommendation
+  ├── Risk Scorecard Breakdown
+  └── Audit-Ready PDF / JSON Output
+```
 
 ---
 
-# 🔍 How CredoLens AI Works
+## Key Features
 
-CredoLens AI follows a structured underwriting pipeline where every stage contributes evidence to the final credit decision.
+- **Automated Cross-Reconciliation**: Reconciles revenue claimed on tax filings against actual banking deposits with automated discrepancy flagging.
+- **Forensic Graph Investigation**: Detects round-tripping money rings and shell counterparties across commercial transaction networks.
+- **Cash Flow Stress Testing**: Simulates revenue shocks, delayed debtor payments, and raw material price spikes to evaluate liquidity resilience.
+- **Policy Engine**: Configurable underwriting policy checks (minimum vintage, debt thresholds, maximum leverage).
+- **Instant CAM Generation**: Generates bank-grade Credit Appraisal Memos complete with charts, risk scoring, and explanatory footnotes.
 
-### Step 1: Document Intelligence
+---
 
-Borrower documents such as bank statements, GST returns, ITRs and invoices are uploaded into the system.
+## Project Structure
 
-The Forensic Vision Agent extracts structured financial information while preserving the relationship between the extracted values and their source documents.
+```
+credolens-ai/
+├── src/                        # React + Vite frontend source code
+│   ├── components/             # Reusable UI widgets, forensic charts
+│   ├── data/                   # Mock financial cases & schema models
+│   └── App.jsx                 # Dashboard router and view layout
+├── public/                     # Static public assets
+├── docs/                       # Architectural specs and pitch deck PDF
+├── package.json                # Project dependencies
+├── vite.config.js              # Vite configuration
+├── tailwind.config.js          # Tailwind CSS design system tokens
+├── .gitignore                  # Exclusion rules
+└── README.md                   # Technical documentation
+```
 
-### Step 2: Financial Reconciliation
+---
 
-Extracted information is cross-checked across different financial sources.
+## Getting Started
 
-```text
-Bank Transactions
-        ↓
-GST Reported Revenue
-        ↓
-ITR / Declared Income
-        ↓
-Financial Consistency Check
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+### Installation & Execution
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pratapashanmukhi/credolens-ai.git
+   cd credolens-ai
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start local development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application:**
+   Open `http://localhost:5173`.
+
+---
+
+## Author
+
+**Shanmukhi Pratapa**  
+B.Tech CSE (AI & ML) — VIT-AP University  
+GitHub: [@pratapashanmukhi](https://github.com/pratapashanmukhi)

@@ -1,7 +1,10 @@
-node_modules
-dist
-dist-ssr
+﻿node_modules/
+dist/
+dist-ssr/
 *.local
-.vscode
-.idea
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
 *.log
