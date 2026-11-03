@@ -1,10 +1,24 @@
-﻿node_modules/
+# Dependency directories
+node_modules/
+
+# Production build outputs
 dist/
 dist-ssr/
+build/
 *.local
+
+# Environment variables
 .env
 .env.*
 !.env.example
+
+# IDE & Editor files
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# OS files & Logs
 *.log
+.DS_Store
+Thumbs.db
